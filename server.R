@@ -9,6 +9,8 @@ shinyServer(function(input, output) {
             
             # assign UI input parameters
             c <- input$c
+            
+            #generating x points for plotting
             #power<-seq(-1,4,0.1)
             power<-seq(-1,5,0.1)
             x<-10^power    
@@ -16,9 +18,11 @@ shinyServer(function(input, output) {
             #y<-  (72.44 *(1-c)*x + (472.3*c*x) / (.647 * c*x +52.85))/(x-c*x + (6.52*c*x)/(.647*c*x+ 52.85) + 6.52)
             
             ############################# experimentation
-            
+            Bname = "urotensin 2"
             Eb = 120
             Cb = 10
+            
+            Aname = "angiotensin II"
             Ea = 40
             Ca = 50
             
