@@ -9,22 +9,28 @@ shinyServer(function(input, output) {
             
             # assign UI input parameters
             c <- input$c
+            Bname <- input$drugB
+            Eb <- input$Eb
+            Cb <- input$Cb
+            Aname<- input$drugA
+            Ea <- input$Ea
+            Ca <- input$Ca
             
             #generating x points for plotting
             #power<-seq(-1,4,0.1)
-            power<-seq(-1,5,0.1)
+            power<-seq(-1,4,0.1)
             x<-10^power    
             
             #y<-  (72.44 *(1-c)*x + (472.3*c*x) / (.647 * c*x +52.85))/(x-c*x + (6.52*c*x)/(.647*c*x+ 52.85) + 6.52)
             
             ############################# experimentation
-            Bname = "urotensin 2"
-            Eb = 120
-            Cb = 10
-            
-            Aname = "angiotensin II"
-            Ea = 40
-            Ca = 50
+            # Bname = "urotensin 2"
+            # Eb = 120
+            # Cb = 10
+            # 
+            # Aname = "angiotensin II"
+            # Ea = 40
+            # Ca = 50
             
             # #backup
             # Eb = 72.44
@@ -69,14 +75,15 @@ shinyServer(function(input, output) {
             # ggplot2::qplot(x,y, log="x",)
             g<-ggplot(data=NULL, aes(x=x,y=y))+
                   #scale_x_log10(limits=c(.1,10000))+
-                  scale_x_log10(limits=c(.1,100000))+
+                  scale_x_log10(limits=c(.1,10000))+
                   #scale_y_continuous(limits=c(0,80))+
-                  scale_y_continuous(limits=c(0,130))+
+                  scale_y_continuous(limits=c(0,(1.1*Eb)))+
                   geom_line(lwd=1.5, color="blue")+
                   geom_point(cex=1.5)+
-                  geom_hline(yintercept = 0, lwd=1.5)+
-                  geom_vline(xintercept = 0, lwd=1.5)+
-                  ylab("Effect")+xlab("Dose in nM")
+                  geom_hline(yintercept = 0, lwd=1.5, color="gray")+
+                  geom_vline(xintercept = 0, lwd=1.5, color="gray")+
+                  ylab("Effect")+xlab("Combined Dose in nM")+
+                  ggtitle(paste("Combination: ", Aname, " at ", c*100, "%, remainder = ", Bname))
                   #geom_line(aes(x=drugB$x, y=drugB$y), lwd=1, lty=2, color="red")+
                   #geom_line(aes(x=drugA$x, y=drugA$y), lwd=1, lty=2, color="red")
             
