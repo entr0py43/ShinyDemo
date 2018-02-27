@@ -1,5 +1,6 @@
 library(shiny)
 library(ggplot2)
+library(plotly)
 
 # Define UI for application that draws a dose response curve
 shinyUI(fluidPage(
@@ -14,12 +15,14 @@ shinyUI(fluidPage(
                               label = "Proportion of Drug B",
                               min = 0.5,
                               max = 1,
-                              value = 0)
+                              value = 0.005)
             ),
             
             # Show a plot of the generated distribution
             mainPanel(
-                  plotOutput("slidePlot")
+                  plotlyOutput("slidePlot",
+                               width = 600,
+                               height = 500)
             )
       )
 ))
